@@ -85,6 +85,9 @@ class FileManagerService: FileSystemService {
         #if os(tvOS)
         // tvOS doesn't have persistent Documents directory, use Caches instead
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        #elseif os(macOS)
+        // macOS sandboxed apps store data in Application Support
+        return NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
         #else
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         #endif

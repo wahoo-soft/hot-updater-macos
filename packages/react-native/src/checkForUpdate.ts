@@ -49,15 +49,15 @@ export async function checkForUpdate(
     return null;
   }
 
-  if (!["ios", "android"].includes(Platform.OS)) {
+  if (!["ios", "android", "macos"].includes(Platform.OS)) {
     options.onError?.(
-      new HotUpdaterError("HotUpdater is only supported on iOS and Android"),
+      new HotUpdaterError("HotUpdater is only supported on iOS, Android, and macOS"),
     );
     return null;
   }
 
   const currentAppVersion = getAppVersion();
-  const platform = Platform.OS as "ios" | "android";
+  const platform = Platform.OS as "ios" | "android" | "macos";
   const currentBundleId = getBundleId();
   const minBundleId = getMinBundleId();
   const channel = getChannel();

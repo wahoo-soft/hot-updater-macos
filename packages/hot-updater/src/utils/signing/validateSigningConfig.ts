@@ -7,7 +7,7 @@ const IOS_KEY = "HOT_UPDATER_PUBLIC_KEY";
 
 export interface SigningConfigIssue {
   type: "error" | "warning";
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "macos";
   code: "MISSING_PUBLIC_KEY" | "ORPHAN_PUBLIC_KEY" | "NATIVE_FILES_NOT_FOUND";
   message: string;
   resolution: string;

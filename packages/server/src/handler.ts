@@ -50,7 +50,7 @@ const handleVersion: RouteHandler = async () => {
 const handleFingerprintUpdate: RouteHandler = async (params, _request, api) => {
   const updateInfo = await api.getAppUpdateInfo({
     _updateStrategy: "fingerprint",
-    platform: params.platform as "ios" | "android",
+    platform: params.platform as "ios" | "android" | "macos",
     fingerprintHash: params.fingerprintHash,
     channel: params.channel,
     minBundleId: params.minBundleId,
@@ -66,7 +66,7 @@ const handleFingerprintUpdate: RouteHandler = async (params, _request, api) => {
 const handleAppVersionUpdate: RouteHandler = async (params, _request, api) => {
   const updateInfo = await api.getAppUpdateInfo({
     _updateStrategy: "appVersion",
-    platform: params.platform as "ios" | "android",
+    platform: params.platform as "ios" | "android" | "macos",
     appVersion: params.appVersion,
     channel: params.channel,
     minBundleId: params.minBundleId,

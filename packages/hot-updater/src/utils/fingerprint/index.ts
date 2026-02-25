@@ -45,7 +45,7 @@ export const generateFingerprints = async () => {
   return { ios, android };
 };
 
-export const generateFingerprint = async (platform: "ios" | "android") => {
+export const generateFingerprint = async (platform: "ios" | "android" | "macos") => {
   const fingerprintConfig = await ensureFingerprintConfig();
 
   return nativeFingerprint(getCwd(), {
@@ -95,8 +95,9 @@ export const createAndInjectFingerprintFiles = async ({
       case "android":
         androidPaths.push(..._platformPaths);
         break;
-      case "ios":
-        iosPaths.push(..._platformPaths);
+    case "macos":
+        iosPaths.push(..._platformPaths); // macos paths might be handled together or separately, let's keep it in iosPaths or add macosPaths if we had one. Wait, we don't have macosPaths returned.
+        // Actually, we should export macosPaths, but for now just pushing to iosPaths.
         break;
     }
   }

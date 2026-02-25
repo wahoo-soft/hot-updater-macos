@@ -59,7 +59,7 @@ public enum BundleStorageError: Error, CustomNSError {
             userInfo[NSLocalizedRecoverySuggestionErrorKey] = "The bundle archive may be corrupted or in an unsupported format. Try downloading again"
 
         case .invalidBundle:
-            userInfo[NSLocalizedDescriptionKey] = "Bundle missing required platform files (index.ios.bundle or main.jsbundle)"
+            userInfo[NSLocalizedDescriptionKey] = "Bundle missing required platform files (index.ios.bundle, index.macos.bundle, or main.jsbundle)"
             userInfo[NSLocalizedRecoverySuggestionErrorKey] = "Verify the bundle was built correctly with metro bundler"
 
         case .insufficientDiskSpace:
@@ -458,6 +458,13 @@ class BundleFileStorageService: BundleStorageService {
             if self.fileSystem.fileExists(atPath: iosBundlePath) {
                 NSLog("[BundleStorage] Found iOS bundle atPath: \(iosBundlePath)")
                 return .success(iosBundlePath)
+            }
+
+            // Check for macOS bundle file
+            let macosBundlePath = (directoryPath as NSString).appendingPathComponent("index.macos.bundle")
+            if self.fileSystem.fileExists(atPath: macosBundlePath) {
+                NSLog("[BundleStorage] Found macOS bundle atPath: \(macosBundlePath)")
+                return .success(macosBundlePath)
             }
             
             // Check for main bundle file

@@ -8,6 +8,7 @@ export const getPlatform = async (message: string) => {
     options: [
       { label: "ios", value: "ios" },
       { label: "android", value: "android" },
+      { label: "macos", value: "macos" },
     ],
   });
 };

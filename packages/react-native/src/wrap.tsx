@@ -1,4 +1,9 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
+
+// useLayoutEffect is safe on all React Native platforms (iOS, macOS, Android).
+// This alias exists for potential future web/SSR compatibility.
+const useIsomorphicLayoutEffect = useLayoutEffect;
+
 import { checkForUpdate } from "./checkForUpdate";
 import type { HotUpdaterError } from "./error";
 import { useEventCallback } from "./hooks/useEventCallback";
@@ -249,7 +254,7 @@ export function wrap<P extends React.JSX.IntrinsicAttributes = object>(
   if (options.updateMode === "manual") {
     return (WrappedComponent: React.ComponentType<P>) => {
       const ManualHOC: React.FC<P> = (props: P) => {
-        useLayoutEffect(() => {
+        useIsomorphicLayoutEffect(() => {
           void handleNotifyAppReady(options);
         }, []);
 
@@ -343,12 +348,12 @@ export function wrap<P extends React.JSX.IntrinsicAttributes = object>(
       }, [progress]);
 
       // Notify native side that app is ready (JS bundle fully loaded)
-      useLayoutEffect(() => {
+      useIsomorphicLayoutEffect(() => {
         void handleNotifyAppReady(restOptions);
       }, []);
 
       // Start update check
-      useLayoutEffect(() => {
+      useIsomorphicLayoutEffect(() => {
         initHotUpdater();
       }, []);
 

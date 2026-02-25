@@ -13,7 +13,7 @@ const DEFAULT_PAGE_OFFSET = 0;
 
 const queryBundlesSchema = typia.createValidate<{
   channel?: string;
-  platform?: "ios" | "android";
+  platform?: "ios" | "android" | "macos";
   limit?: string;
   offset?: string;
 }>();

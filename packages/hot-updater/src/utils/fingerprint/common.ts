@@ -36,7 +36,7 @@ function getDefaultIgnorePaths(): string[] {
 }
 
 export function getOtaFingerprintOptions(
-  platform: "ios" | "android",
+  platform: "ios" | "android" | "macos",
   path: string,
   options: FingerprintOptions,
 ): Options {
@@ -111,7 +111,7 @@ export type FingerprintSources = {
 };
 
 export type FingerprintOptions = {
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "macos";
   extraSources?: string[];
   ignorePaths?: string[];
   debug?: boolean;

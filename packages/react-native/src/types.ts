@@ -8,7 +8,7 @@ export interface ResolverCheckUpdateParams {
   /**
    * The platform the app is running on
    */
-  platform: "ios" | "android";
+  platform: "ios" | "android" | "macos";
 
   /**
    * The current app version
